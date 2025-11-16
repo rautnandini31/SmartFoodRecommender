@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f9fefb;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+   
+}
+.hero-content {
+  position: relative;
+  z-index: 10; /* higher than the ::before background */
+}
+
+
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 50%;
+  background: url('../images/ddf4ce9a-999e-4d89-9c24-9d82a478738a.jpeg') no-repeat center center;
+  background-size: cover;
+  z-index: 0;
+}
+
+
+.hero {
+    position: relative;
+    height: 100vh;
+    color: white;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 8%;
+}
+
+.hero-top {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-bottom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+    background-color: #f0fff6; /* light background for bottom half */
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.hero-top h4 {
+    color: #c7f6a4;
+    font-size: 50px;
+    margin: 0;
+}
+
+.hero-bottom h1 {
+    color: #222;
+    font-family: forum, serif;
+    font-size: 90px;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 15px;
+    white-space: nowrap; /* keep "Ingredient Pairing" in single line */
+}
+
+.subtitle {
+    color: #3a945b;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: black;
+    font-size: 1rem;
+}
+
+
+.subtitle,
+.description {
+    margin-top: 20px; /* Spacing between lines */
+    color: #222; /* Set color to match better with the background */
+}
+
+/* Additional styling for the rest of the text in the lower half */
+.subtitle {
+    color: #3a945b;
+    font-size: 1.2rem;
+}
+
+.description {
+    color: black;
+}
+/* Input Section (Features layout reuse) */
+.features {
+    padding: 80px 8%;
+    background: #ffffff;
+}
+.container {
+    display: flex;
+    justify-content: center;
+}
+.feature-card {
+    background: #f5fbf7;
+    border-radius: 15px;
+    padding: 40px 30px;
+    max-width: 700px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.feature-card h3 {
+    color: #3a945b;
+    margin-bottom: 10px;
+}
+.feature-card p {
+    color: #444;
+}
+
+/* Input + Button */
+.input-container {
+    margin-top: 15px;
+}
+#ingredientInput {
+    padding: 12px;
+    width: 60%;
+    max-width: 400px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+#findPairingsBtn {
+    background: #3a945b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-left: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#findPairingsBtn:hover {
+    background: #2f7d4b;
+}
+
+/* Results */
+#pairingList {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+#pairingList li {
+    background: #e8f9ef;
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #2f7d4b;
+}
+
+/* Info Section */
+.info-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 8%;
+    background: #e9f8f0;
+    flex-wrap: wrap;
+}
+.info-text {
+    flex: 1;
+    min-width: 300px;
+}
+.info-text h2 {
+    color: #2f7d4b;
+    margin-bottom: 20px;
+}
+.info-text p {
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+.info-text button {
+    background: #3a945b;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+.info-text button:hover {
+    background: #2f7d4b;
+}
+.info-image img {
+    width: 650px;
+    height: 350px;
+    border-radius: 20px;
+}
+
+/* Footer */
+footer {
+    background: #2f7d4b;
+    color: #fff;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9rem;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 8%;
+  flex-wrap: wrap;
+  background-color: #f0fff6; /* optional light background */
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-image {
+  flex: 1;
+  width: 100%;
+  height: 70%;
+  text-align: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 100%; /* control image size */
+  height: auto;
+  border-radius: 15px;
+} 

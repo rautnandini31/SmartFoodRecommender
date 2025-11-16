@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Pairing | Smart Recipe Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="hero ingredient-hero"> 
+    <div class="hero-content">
+        <h4 style="color: #c7f6a4;">Discover Perfect Ingredient Pairings</h4>
+        <h1 style="color: #ffffff;">Ingredient Pairing</h1>
+        <p class="description">Enter ingredients you have, and we’ll suggest the perfect complementary ingredients for your dishes.</p>
+    </div>
+</header>
+
+<section class="search-form-section">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 30px;">Find Your Next Ingredient</h2>
+        <form id="ingredient-form" class="recommendation-form">
+            <input type="text" id="ingredients-input" placeholder="e.g., tomato, onion, oil, cardamom" required>
+            <button type="submit">Get Pairings</button>
+        </form>
+    </div>
+</section>
+
+<section id="results-section" class="results-section">
+    <div class="container">
+        <h3 id="results-message" style="text-align: center; color: #2f7d4b; margin-bottom: 20px;">Suggestions will appear here.</h3>
+        <ul id="results-list" class="results-list">
+        </ul>
+        <div id="no-results" style="text-align: center; color: #cc3333; display: none;">No strong pairings found. Try more common ingredients!</div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/download (1).jpeg') }}" alt="Tomatoes & Basil">
+            <h3>Tomatoes & Basil</h3>
+            <p>A classic pairing for sauces, salads, and pizzas. Fresh and flavorful!</p>
+        </div>
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/Air Fryer Sliced Potatoes.jpeg') }}" alt="Potatoes & Rosemary">
+            <h3>Potatoes & Rosemary</h3>
+            <p>Earthy and aromatic — a perfect combination for roasting or frying.</p>
+        </div>
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/Italian Pasta al Pomodoro.jpeg') }}" alt="Pasta & Parmesan">
+            <h3>Pasta & Parmesan</h3>
+            <p>The Italian staple: simple, savory, and satisfying in any dish.</p>
+        </div>
+    </div>
+</section>
+
+<section class="info-section">
+    <div class="info-text">
+        <h2>Cook Smarter with Ingredient Harmony</h2>
+        <p>Explore ingredient combinations, discover new flavors, and elevate your cooking. Our ingredient pairing guide helps you create perfectly balanced meals every time.</p>
+        <a href="{{ url_for('mealplanner') }}"><button>Start Meal Planner</button></a>
+    </div>
+    <div class="info-image">
+        <img src="{{ url_for('static', filename='images/info-image.jpg') }}" alt="Meal plan preview">
+    </div>
+</section>
+
+<a href="{{ url_for('home') }}" class="back-to-home">Home</a>
+
+<footer>
+    <p>© 2025 Smart Recipe Hub | All Rights Reserved</p>
+    <p>Contact: smartrecipehub@gmail.com</p>
+</footer>
+
+<script>
+    document.getElementById('ingredient-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const ingredientsInput = document.getElementById('ingredients-input').value;
+        const resultsList = document.getElementById('results-list');
+        const resultsMessage = document.getElementById('results-message');
+        const noResults = document.getElementById('no-results');
+        
+        resultsList.innerHTML = '';
+        noResults.style.display = 'none';
+        resultsMessage.textContent = 'Searching...';
+
+        try {
+            const response = await fetch('/api/suggest_pairings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ingredients: ingredientsInput }),
+            });
+
+            const data = await response.json();
+
+            if (data.success && data.results.length > 0) {
+                resultsMessage.textContent = data.message;
+                data.results.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${item.ingredient}</strong> (Confidence: ${item.score})`;
+                    resultsList.appendChild(li);
+                });
+            } else {
+                resultsMessage.textContent = 'No Pairings Found';
+                noResults.style.display = 'block';
+            }
+        } catch (error) {
+            resultsMessage.textContent = 'An error occurred during search.';
+            console.error('Error:', error);
+        }
+    });
+</script>
+
+</body>
+</html>

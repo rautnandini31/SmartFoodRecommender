@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner | Smart Recipe Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="hero mealplanner-hero"> 
+    <div class="hero-content">
+        <h4 style="color: #c7f6a4;">Plan Balanced Meals Easily</h4>
+        <h1 style="color: #ffffff;">Meal Planner</h1>
+        <p class="description">Create customized meal plans based on your preferred cuisine, diet type, and ingredients you love.</p>
+    </div>
+</header>
+
+<section class="search-form-section">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 30px;">Filter Dishes</h2>
+        <form id="mealplanner-form" class="recommendation-form">
+            <select id="diet-select" style="width: 45%;">
+                <option value="">-- Select Diet Type (Optional) --</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="non vegetarian">Non Vegetarian</option>
+            </select>
+            <input type="text" id="region-input" placeholder="Enter Region (e.g., North, West, etc.)" style="width: 45%;">
+            <button type="submit" style="width: 100%; margin-top: 15px;">Get Meal Ideas</button>
+        </form>
+    </div>
+</section>
+
+<section id="results-section" class="results-section">
+    <div class="container">
+        <h3 id="results-message" style="text-align: center; color: #2f7d4b; margin-bottom: 20px;">Dishes matching your criteria will appear here.</h3>
+        <ul id="results-list" class="results-list">
+        </ul>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/download (1).jpeg') }}" alt="Vegetarian Plan">
+            <h3>Vegetarian Plans</h3>
+            <p>Delicious plant-based meals designed to meet your daily nutrition needs.</p>
+        </div>
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/Air Fryer Sliced Potatoes.jpeg') }}" alt="Regional Specials">
+            <h3>Regional Specials</h3>
+            <p>Explore authentic dishes from different parts of India, tailored to your location.</p>
+        </div>
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/Italian Pasta al Pomodoro.jpeg') }}" alt="Quick Meals">
+            <h3>Quick Meals</h3>
+            <p>Fast, easy, and healthy recipes perfect for busy weekdays or light eating.</p>
+        </div>
+    </div>
+</section>
+
+<section class="info-section">
+    <div class="info-text">
+        <h2>Plan Smarter. Eat Healthier.</h2>
+        <p>Use our meal planner to create balanced menus, track ingredients, and prepare meals ahead of time. Perfect for busy schedules or those looking to improve their diet.</p>
+        <a href="{{ url_for('ingredients') }}"><button>Explore Ingredients</button></a>
+    </div>
+    <div class="info-image">
+        <img src="{{ url_for('static', filename='images/info-image.jpg') }}" alt="Meal plan preview">
+    </div>
+</section>
+
+<a href="{{ url_for('home') }}" class="back-to-home">Home</a>
+
+<footer>
+    <p>© 2025 Smart Recipe Hub | All Rights Reserved</p>
+    <p>Contact: smartrecipehub@gmail.com</p>
+</footer>
+
+<script>
+    document.getElementById('mealplanner-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const diet = document.getElementById('diet-select').value;
+        const region = document.getElementById('region-input').value;
+        const resultsList = document.getElementById('results-list');
+        const resultsMessage = document.getElementById('results-message');
+        
+        resultsList.innerHTML = '';
+        resultsMessage.textContent = 'Searching...';
+
+        try {
+            const response = await fetch('/api/meal_planner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ diet: diet, region: region }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                resultsMessage.textContent = data.message;
+                if (data.results.length > 0) {
+                    data.results.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        resultsList.appendChild(li);
+                    });
+                }
+            } else {
+                resultsMessage.textContent = data.message || 'No meals found matching your criteria.';
+            }
+        } catch (error) {
+            resultsMessage.textContent = 'An error occurred during search.';
+            console.error('Error:', error);
+        }
+    });
+</script>
+
+</body>
+</html>

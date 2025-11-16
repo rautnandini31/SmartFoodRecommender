@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Recipe Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h4 style="color: #c7f6a4; font-size: 50px;">Welcome to</h4>
+            <h1 style="color: #ffffff; letter-spacing: -0.03em; direction: ltr; fill: rgb(255, 255, 255); font-size: 100px; font-family: forum, serif; font-weight: normal; font-style: normal; text-anchor: start; text-decoration: none; text-transform: uppercase;">Smart Recipe Hub</h1>
+            <p class="subtitle" style="color: #c7f6a4">Discover, Pair, and Plan Your Meals the Smart Way!</p>
+            <p class="description">Our AI-powered hub helps you find ingredient pairings, dish recommendations, and meal plans — all tailored to your taste and preferences.</p></br>
+            
+            <div class="hero-buttons">
+                
+                <div class="hero-buttons">
+  <a href="{{ url_for('ingredients') }}" class="btn">Ingredient Pairing</a>
+  <a href="{{ url_for('recipes') }}" class="btn">Dish Recommendations</a>
+  <a href="{{ url_for('mealplanner') }}" class="btn">Meal Planner</a>
+</div>
+
+                
+            </div>
+        </div>
+    </header>
+
+       <section class="features">
+    <div class="container">
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/download (1).jpeg') }}" alt="Ingredient Pairing">
+            <h3 style="letter-spacing: -0.03em; font-size: 20px; font-family: forum, serif; text-transform: uppercase;">Ingredient Pairing Suggestions</h3>
+            <p>Enter ingredients you have, and we’ll suggest the perfect complementary ingredients.</p>
+        </div>
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/Air Fryer Sliced Potatoes.jpeg') }}" alt="Dish Recommendations">
+            <h3 style="letter-spacing: -0.03em; font-size: 20px; font-family: forum, serif; text-transform: uppercase;">Dish Recommendations</h3>
+            <p>Select any dish and explore other meals with similar flavor profiles and ingredients.</p>
+        </div>
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/Juicy Meatballs with Rice & Roasted Veggies.jpeg') }}" alt="Meal Planner">
+            <h3 style="letter-spacing: -0.03em; font-size: 20px; font-family: forum, serif; text-transform: uppercase;">Meal Planner</h3>
+            <p>Plan a balanced diet by choosing a cuisine or diet type. Get complete dish combinations instantly.</p>
+        </div>
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/sunday dinners from ireland.jpeg') }}" alt="Smart Tips">
+            <h3 style="letter-spacing: -0.03em; font-size: 20px; font-family: forum, serif; text-transform: uppercase;">Smart Cooking Tips</h3>
+            <p>Quick tips and tricks for efficient, sustainable, and flavorful cooking every day.</p>
+        </div>
+    </div>
+</section>
+
+    <section class="feedback">
+        <h2 style="letter-spacing: -0.03em; direction: ltr; fill: rgb(0, 0, 0); font-size: 40px; font-family: forum, serif; font-weight: normal; font-style: normal; text-anchor: start; text-decoration: none; text-transform: uppercase;">Community Favorites</h2>
+        <div class="feedback-container">
+            <div class="feedback-card">
+                <img src="{{ url_for('static', filename='images/Italian Pasta al Pomodoro.jpeg') }}" alt="Dish 1">
+                <h4>Tomato Basil Pasta</h4>
+                <p>Our users love this vibrant, fresh meal — perfectly balanced and flavorful.</p>
+            </div>
+            <div class="feedback-card">
+                <img src="{{ url_for('static', filename='images/Ultimate BLT Grilled Cheese Sandwich.jpeg') }}" alt="Dish 2">
+                <h4>Classic Veg Sandwich</h4>
+                <p>Crunchy, healthy, and satisfying — a quick meal made smarter with ingredient pairing!</p>
+            </div>
+            <div class="feedback-card">
+                <img src="{{ url_for('static', filename='images/One-Pot Curry Chicken Soup Recipe.jpeg') }}" alt="Dish 3">
+                <h4>Hearty Soup Bowl</h4>
+                <p>A cozy comfort dish — recommended for cool evenings and light meal plans.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-text">
+            <h2>Plan Smarter. Cook Better.</h2>
+            <p>Explore ingredient harmony and discover how Smart Recipe Hub helps you create balanced meals effortlessly. 
+            From healthy diet combos to gourmet discoveries, we bring your kitchen ideas to life.</p>
+            
+            <a href="{{ url_for('mealplanner') }}" class="info-button-link">Start Planning</a>
+        </div>
+        <div class="info-image">
+            <img src="{{ url_for('static', filename='images/download (2).jpeg') }}" alt="Meal plan preview">
+        </div>
+    </section>
+
+    <footer>
+        <p>Smart Recipe Hub</p>
+        <p>Contact: smartrecipehub@gmail.com</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
