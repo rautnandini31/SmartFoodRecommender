@@ -109,8 +109,11 @@ def api_meal_planner():
 
 
 if __name__ == '__main__':
+    import os
+    
     # Use absolute path to the CSV so the check is accurate
     csv_path = os.path.join(BASE_DIR, 'indian_food.csv')
+    
     if not os.path.exists(csv_path):
         print("\n" + "="*70)
         print("CRITICAL ERROR: 'indian_food.csv' not found at:", csv_path)
@@ -122,5 +125,8 @@ if __name__ == '__main__':
         print("Project folder:", BASE_DIR)
         print("Static folder:", app.static_folder)
         print("Template folder:", app.template_folder)
-        # Use 127.0.0.1 for local dev; change to 0.0.0.0 only if you need external access
-        app.run(debug=True, host='127.0.0.1', port=5000)
+
+        # Use 0.0.0.0 for deployment; default to 127.0.0.1 during local dev
+        # Use dynamic port assigned by Render (or default to 5000 locally)
+        port = int(os.environ.get("PORT", 5000))
+        app.run(debug=True, host='0.0.0.0', port=port)
